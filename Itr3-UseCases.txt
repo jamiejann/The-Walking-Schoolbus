@@ -1,0 +1,118 @@
+Use Cases -- Iteration 3
+========================
+
+Gamification
+---------------
+- As a student, I want the app to reward me for how often I walk with my group. Each time I complete a 
+  walk with my group I earn one or more points (each team decides how to reward users with points). 
+
+
+- As a student (and possibly a group leader), I want to earn points each time I walk with my group. In 
+  the app I can prominently see my current points that I can spend, and I can spend my points on in-app 
+  rewards. In the app I can go look at my currently 'purchased' rewards, and up-coming rewards that I 
+  could buy. Things I might want to spend points on include:
+   * app customization, such as new backgrounds, new colour schemes, new in-app icons,
+   * buying stickers in game to drag onto a virtual sticker book,
+   * avatar icons and glorious titles like "dragon slayer" or "butterfly catcher",
+   * or other ideas! 
+(Teams can pick what reward structure they want to setup, be it one of these suggestions or something 
+ else. You are encouraged to be creative and come up with ways to motivate the students. Rewards must be 
+ at least as challenging to implement as an above suggestion. This is how the user will be motivated, so 
+ make sure you draw the user in with this!)
+
+   
+- As a user, I can view a leader board showing the total number of points each user has earned over the 
+  lifetime of using the app (not just the number of points they currently have to spend). The leader board 
+  shows the first name and first letter of the last name for each user, along with how many points the 
+  user has earned over their lifetime of using the app. The leader board shows all users (not just ones in 
+  my walking group), and is sorted from highest-points to lowest points. It is fine if the leader board 
+  only shows the top 100 users (or so) if that makes more sense from an app design point of view.
+
+
+- As a developer, I can use the provided web-page to manually award points to users for testing (or TA 
+  marking!) -- DONE FOR YOU!
+
+
+
+Permissions
+-----------
+- As a parent I want to approve or deny requests: 
+   * to set my child as the leader of a walking group (likely when my child creates a group).
+   
+
+- As a user, I can see all permission requests which have ever been sent to me. For each permission 
+  request I can see the details of what action was being requested, and the status of that request 
+  (approved, rejected, or pending). I can see which users approved or rejected the request.
+
+In detail, when an API call is made to the server which would trigger an action which now requires 
+permission, the server will create one Permission record.
+   - A Permission record stores:
+      - who requested the action
+      - what action is being requested (X joining group Y, X being monitored by Y, etc).
+      - status: accepted, rejected, pending
+      - which users were asked to give permission for the action,
+      - which users have accepted or rejected the request
+   - A Permission record is status is:
+      pending: if it is not yet accepted or rejected.
+      rejected: if any of the users who are asked to give permission reject the request.
+      accepted: if, for each set of users who need to grant permission, one user of that set grants 
+      permission.
+   - A Permission record may have multiple sets of users needing to give permission. For example, if 
+     child A requests to monitor child B, then:
+      - B will have to approve it, and
+      - one of A's 'parents' will have to approve it, and
+      - one of B's 'parents' will have to approve it.
+   - Each user can see a list of Permission records which for which they were asked to give permission.
+   - Once one user has accepted or rejected a request, no other users in that same user-set may accept 
+     or reject the request. Though, they may still see the request for their reference.
+   - In cases where nobody need be asked for permission (i.e., the current user, who initiated the 
+     action, is sufficient for granting all required permissions) then the server completes the requested 
+     change without generating a permission request or asking anyone (even the current user) for 
+     permission.
+
+   
+   
+
+
+EDGE CASES:
+Q. What happens to pending requests once the last user is removed from monitoring a user?
+-> The list of who can approve/reject a request is fixed at the time the request is made. 
+   Therefore, the user will still see the requests made before they stopped monitoring the user.
+  
+Q. Won't this make it hard to test?
+-> Yes!
+   So there will be a special permission-override header on the HTTP messages to the server which tells 
+   the server not to ask users for permission. This permission-override will be enabled by default so 
+   that existing app functionality does not break. When your app wants to begin triggering permission 
+   requests, you can explicitly disable the override by sending the required header to enable 
+   permissions. 
+
+   (Note that such a header would normally never be allowed on a production server; this is only for our 
+   testing. Expected use of this override header is that, once your app supports permissions, you then 
+   start sending the header on every message to the server to enable permissions. Your final submission 
+   for iteration 3 must send the "enable permissions" header on every message.)
+   
+   
+   
+   
+   
+   
+   
+   
+Permissions removed from this iteration:
+- As a parent I want to approve or deny requests: 
+   * for my child to join a walking group
+   * to begin monitoring my child,
+   * to remove a person from the set of people monitoring my child,
+     (exception for a 'parent' to remove themselves from monitoring my child; the 'parent' can do this 
+     themselves without additional permission.)
+   * where my child would begin monitoring another user
+   
+- As a user, I want to protect my privacy so only people I trust can monitor me. I want to be able to 
+  approve or deny requests:
+   * to monitor me,
+   * to add me to a walking group,
+   * for me to monitor someone else.
+   
+- As a group leader I want to ensure that I have control over who join my group. I want to be able to 
+  approve or deny requests to join my group.

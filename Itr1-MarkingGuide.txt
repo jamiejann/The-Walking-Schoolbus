@@ -1,0 +1,46 @@
+Walking Group: Iteration 1
+
+
+[15] Create Account, Log in/out
+   - Create new user
+   - Automatic log in
+   - Log out (and disables automatic log-in until re-logged-in)
+  
+
+[25] Manage Account Monitoring
+   - See list of who they monitor and whom monitors them
+   - Add/remove uses to or fonm these lists (either self, or someone they monitor).
+
+[40] Manage Walking Group
+   - Show map centred on GPS location
+   - See existing groups on the map
+   - Able to join self (or someone the user monitors) to the group.
+   - Able to remove self (or someone the user monitors) from the group.
+  
+   
+[10] Overall
+   - Application flows smoothly.
+   - Reasonable software architecture. Must have model in different package than UI. Should use singleton pattern.
+   - Nice UI layouts; resizes to different size screens reasonably well.
+
+[10] Correct use of Git and GitLab
+   - Using GitLab issues to track features to work on.
+   - Use Git/GitLab branchs and GitLab merge requests 
+   - Correctly builds when cloned from GitLab.
+
+[ 0] Good quality code (worth 0, but up to a 20 mark penalty may be applied).
+   - Good class, method, variable names.
+   - Perfectly formatted code.
+   - Comments on all classes (not needed *inside* classes, just on the class level)
+   - All strings which end user may see on UI (not LogCat) are in strings.xml
+
+
+
+
+	 
+
+General Notes:
+- UI must be in a separated package from the data "Model".
+- Use a singleton pattern to allow all parts of the UI to access the model.
+- From any screen, the Android back button must do the "reasonable" thing.
+- Strings shown to the user must be in string.xml

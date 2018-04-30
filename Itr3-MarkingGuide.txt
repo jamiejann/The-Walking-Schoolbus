@@ -1,0 +1,22 @@
+Use Cases -- Iteration 3
+========================
+
+Gamification [60]
+	[10] Earn points each time user completes a walk.
+	[20] User able to spend points on rewards, or automatically get rewards at milestones (achievements).
+	     Up to 15 point deduction for low quality or poorly executed/integrated rewards.
+	[5]  Able to see current points
+	[10] Able to see rewards previously unlocked/earned.
+	[15] Leader board: display total number of points, first name, first letter of last name.
+
+
+
+Permissions [40]
+	[15] App functions correctly when an action generates a permission request 
+	     (creating group while being monitored by a parent; app enables permissions)
+	[10] App shows pending permissions and allows user to approve or deny their pending requests.
+	[15] App allows user to see all permission requests which have been sent to them. Shows: 
+	     - status, 
+	     - details of what was requested, 
+	     - which user approved or denied the request (if any)
+

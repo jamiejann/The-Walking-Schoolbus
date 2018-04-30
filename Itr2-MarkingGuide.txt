@@ -1,0 +1,61 @@
+Walking Group: Iteration 2
+
+'Parent' means: Someone who monitors another user.
+'Child' means: Someone who is monitored by another user.
+
+
+[15] User Information
+   - Able to see and edit info on self
+   - Able to see and edit info on my children
+   - Information is correctly sent to server and retrieved
+   - Clear and usable user interface for editing info.
+
+[15] Walking Groups
+   App supports the following two features, for the below list of users:
+   a) can see names of members of group, and 
+   b) can see detailed info (names, phone number, ...) of parents of children in the group.
+
+   User:
+   - Group leader
+   - Member of a walking group
+   - Parents of children who are in the walking group
+
+[30] On Walk Features
+   - Leader or group members can manually start and stop uploading GPS location every 30s.
+   - GPS uploading automatically stops 10min after reaching destination.
+   - Parent dashboard for 'parents' showing map with GPS location of children and their leaders.
+   - Parent dashboard indicates how old each GPS point is (time since last update).
+
+[30] In-App Messages
+   - See read and unread messages.
+   - Parents dashboard shows how many unread messages there are.
+   - Parents dashboard has easy way to go view (new?) messages.
+   - App checks for messages every minute
+   - Leader able to send broadcast message to all members of my group and their parents.
+   - Leader able to send broadcast message as either emergency or not.
+   - Child on walk has panic button to indicate a problem (may optionally include a text message too) to parents & leaders
+   - Child able to send a non-emergency message to parents & leaders
+
+   
+[ 5] Overall
+   - Application flows smoothly.
+   - Nice UI layouts; resizes to different size screens reasonably well.
+
+[ 5] Correct use of Git and GitLab
+   - Using GitLab issues to track features to work on.
+   - Use Git/GitLab branchs and GitLab merge requests 
+   - Correctly builds when cloned from GitLab.
+
+[ 0] Good quality code (worth 0, but up to a 20 mark penalty may be applied).
+   - Good class, method, variable names.
+   - Perfectly formatted code.
+   - Comments on all classes (not needed *inside* classes, just on the class level)
+   - All strings which end user may see on UI (not LogCat) are in strings.xml
+
+	 
+
+General Notes:
+- UI must be in a separated package from the data "Model".
+- Use a singleton pattern to allow all parts of the UI to access the model.
+- From any screen, the Android back button must do the "reasonable" thing.
+- Strings shown to the user must be in string.xml
